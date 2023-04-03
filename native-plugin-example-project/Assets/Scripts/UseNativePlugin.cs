@@ -1,9 +1,14 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class UseNativePlugin : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _resultOutput;
+    
 #if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
     [DllImport("test-plugin")]
     private static extern IntPtr createExportTest();
@@ -17,14 +22,20 @@ public class UseNativePlugin : MonoBehaviour
 
     void Start()
     {
+        Assert.IsNotNull(_resultOutput);
+
+        StringBuilder sb = new StringBuilder();
+
 #if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
         IntPtr instanceHandle = createExportTest();
-        Debug.Log("nativeHandle:" + instanceHandle.ToString());
+        sb.AppendLine("nativeHandle:" + instanceHandle.ToString());
 
         int result = getResult(instanceHandle, 10);
-        Debug.Log("result:" + result.ToString());
+        sb.AppendLine("result:" + result.ToString());
 
         freeExportTest(instanceHandle);
 #endif
+
+        _resultOutput.text = sb.ToString();
     }
 }
