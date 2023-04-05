@@ -27,7 +27,8 @@ android {
 }
 
 dependencies {
-
+    // Unity側でAARをビルドする際には､libs以下を含めない
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     testImplementation 'junit:junit:4.13.2'
