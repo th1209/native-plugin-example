@@ -13,5 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "test-plugin"
-include ':app'
 include ':calculation'
