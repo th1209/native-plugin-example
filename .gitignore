@@ -444,7 +444,8 @@ FodyWeavers.xsd
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# Androidで利用することがあるので外す
+# *.jar
 *.war
 *.nar
 *.ear
