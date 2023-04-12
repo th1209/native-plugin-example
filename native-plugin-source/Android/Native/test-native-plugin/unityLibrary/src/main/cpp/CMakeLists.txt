@@ -1,7 +1,7 @@
 # For more information about using CMake with Android Studio, read the
 # documentation: https://d.android.com/studio/projects/add-native-code.html
 
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.22.1)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -9,13 +9,13 @@ cmake_minimum_required(VERSION 3.4.1)
 # Gradle automatically packages shared libraries with your APK.
 
 add_library(# Sets the name of the library.
-        native-lib
+        test-native-plugin
 
         # Sets the library as a shared library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        copy-texture-data.cpp)
+        export.cpp)
 
 # Specifies a path to native header files.
 include_directories(Unity/)
@@ -38,9 +38,8 @@ find_library(# Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries(# Specifies the target library.
-        native-lib
+        test-native-plugin
 
         # Links the target library to the log library
         # included in the NDK.
-        ${log-lib}
-        GLESv2)
+        ${log-lib})
