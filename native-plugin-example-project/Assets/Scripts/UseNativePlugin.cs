@@ -19,13 +19,13 @@ public class UseNativePlugin : MonoBehaviour
     [DllImport("test-plugin")]
     private static extern int getResult(IntPtr instance, int num);
 #elif UNITY_ANDROID
-    [DllImport("libtest-native-plugin")]
+    [DllImport("test-native-plugin")]
     private static extern IntPtr createExportTest();
 
-    [DllImport("libtest-native-plugin")]
+    [DllImport("test-native-plugin")]
     private static extern void freeExportTest(IntPtr instance);
 
-    [DllImport("libtest-native-plugin")]
+    [DllImport("test-native-plugin")]
     private static extern int getResult(IntPtr instance, int num);
 #endif
 
