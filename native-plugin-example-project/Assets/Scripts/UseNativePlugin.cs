@@ -18,6 +18,15 @@ public class UseNativePlugin : MonoBehaviour
 
     [DllImport("test-plugin")]
     private static extern int getResult(IntPtr instance, int num);
+#elif UNITY_ANDROID
+    [DllImport("libtest-native-plugin")]
+    private static extern IntPtr createExportTest();
+
+    [DllImport("libtest-native-plugin")]
+    private static extern void freeExportTest(IntPtr instance);
+
+    [DllImport("libtest-native-plugin")]
+    private static extern int getResult(IntPtr instance, int num);
 #endif
 
 #if !UNITY_EDITOR && UNITY_ANDROID
@@ -51,45 +60,21 @@ public class UseNativePlugin : MonoBehaviour
         sb.AppendLine("result:" + result.ToString());
 
         freeExportTest(instanceHandle);
-#endif
+#elif UNITY_ANDROID 
+        IntPtr instanceHandle = createExportTest();
+        sb.AppendLine("nativeHandle:" + instanceHandle.ToString());
 
-#if !UNITY_EDITOR && UNITY_ANDROID
-        try
-        {
-            _calculator = new AndroidJavaObject($"{CalculatorConstants.PackageName}.{CalculatorConstants.ClassName}", gameObject.name);
-            var current = 0.0f;
+        int result = getResult(instanceHandle, 10);
+        sb.AppendLine("result:" + result.ToString());
 
-            current = _calculator.Call<float>(CalculatorConstants.MethodName.Add, 10);
-            sb.AppendLine("currentValue:" + current.ToString());
-            current = _calculator.Call<float>(CalculatorConstants.MethodName.Subtract, 5);
-            sb.AppendLine("currentValue:" + current.ToString());
-            // ※UnityPlayer.UnitySendMessageはGameObject名指定なので､当然だがローカル関数は使えなかった
-            _calculator.Call(CalculatorConstants.MethodName.Multiply, 2, "OnCalculationComplete");
-            _calculator.Call(CalculatorConstants.MethodName.Divide, 5, "OnCalculationComplete");
-        }
-        catch (Exception e)
-        {
-            sb.AppendLine($"exception:{e.GetType()} message:{e.Message} stackTrace:{e.StackTrace}");
-        }
+        freeExportTest(instanceHandle);
 #endif
 
         _resultOutput.text = sb.ToString();
     }
 
-#if !UNITY_EDITOR && UNITY_ANDROID
-    private void OnCalculationComplete(string result)
-    {
-        var log = "currentValue:" + float.Parse(result);
-        UnityEngine.Debug.Log(log);
-        _resultOutput.text = $"{_resultOutput.text}\n{log}";
-    }
-#endif
-
     private void OnDestroy()
     {
-#if !UNITY_EDITOR && UNITY_ANDROID
-        _calculator?.Dispose();
-        _calculator = null;
-#endif
+
     }
 }
