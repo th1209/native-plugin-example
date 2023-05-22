@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 public class UseNativePlugin : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _resultOutput;
-    
+
 #if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
     [DllImport("test-plugin")]
     private static extern IntPtr createExportTest();
@@ -27,7 +27,12 @@ public class UseNativePlugin : MonoBehaviour
 
     [DllImport("test-native-plugin")]
     private static extern int getResult(IntPtr instance, int num);
+#elif UNITY_IOS
+    [DllImport("__Internal", EntryPoint = "printHelloWorld")]
+    private static extern Int32 PrintHelloWorld();
 #endif
+    
+    
 
 #if !UNITY_EDITOR && UNITY_ANDROID
     private AndroidJavaObject _calculator;
@@ -68,6 +73,9 @@ public class UseNativePlugin : MonoBehaviour
         sb.AppendLine("result:" + result.ToString());
 
         freeExportTest(instanceHandle);
+#elif UNITY_IOS
+        sb.AppendLine($"result:" + PrintHelloWorld());
+        // sb.AppendLine($"result: test");
 #endif
 
         _resultOutput.text = sb.ToString();
