@@ -16,15 +16,14 @@
 @end
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
 int32_t printHelloWorld() {
-    return 0;
-    //return [Example printHelloWorld];
+    return [Example printHelloWorld];
 }
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 }
 #endif

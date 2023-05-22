@@ -75,7 +75,6 @@ public class UseNativePlugin : MonoBehaviour
         freeExportTest(instanceHandle);
 #elif UNITY_IOS
         sb.AppendLine($"result:" + PrintHelloWorld());
-        // sb.AppendLine($"result: test");
 #endif
 
         _resultOutput.text = sb.ToString();
