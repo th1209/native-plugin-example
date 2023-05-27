@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A5B45C8029DB16B100EB108B /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5B45C7E29DB16B100EB108B /* export.cpp */; };
+		A5852BF72A21C84000D7EE52 /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5852BF62A21C84000D7EE52 /* export.cpp */; };
+		A5852C092A21CACA00D7EE52 /* marshalling_example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5852C072A21CACA00D7EE52 /* marshalling_example.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A5852BF52A21C84000D7EE52 /* export.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = export.hpp; sourceTree = "<group>"; };
+		A5852BF62A21C84000D7EE52 /* export.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = export.cpp; sourceTree = "<group>"; };
+		A5852C072A21CACA00D7EE52 /* marshalling_example.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = marshalling_example.cpp; sourceTree = "<group>"; };
+		A5852C082A21CACA00D7EE52 /* marshalling_example.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = marshalling_example.hpp; sourceTree = "<group>"; };
 		A5B45C7429DB162A00EB108B /* test-plugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "test-plugin.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B45C7729DB162A00EB108B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5B45C7E29DB16B100EB108B /* export.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = export.cpp; sourceTree = "<group>"; };
-		A5B45C7F29DB16B100EB108B /* export.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = export.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,9 +50,11 @@
 		A5B45C7629DB162A00EB108B /* test-plugin */ = {
 			isa = PBXGroup;
 			children = (
+				A5852BF62A21C84000D7EE52 /* export.cpp */,
+				A5852BF52A21C84000D7EE52 /* export.hpp */,
 				A5B45C7729DB162A00EB108B /* Info.plist */,
-				A5B45C7E29DB16B100EB108B /* export.cpp */,
-				A5B45C7F29DB16B100EB108B /* export.hpp */,
+				A5852C072A21CACA00D7EE52 /* marshalling_example.cpp */,
+				A5852C082A21CACA00D7EE52 /* marshalling_example.hpp */,
 			);
 			path = "test-plugin";
 			sourceTree = "<group>";
@@ -120,7 +125,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B45C8029DB16B100EB108B /* export.cpp in Sources */,
+				A5852BF72A21C84000D7EE52 /* export.cpp in Sources */,
+				A5852C092A21CACA00D7EE52 /* marshalling_example.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
