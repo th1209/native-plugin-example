@@ -1,16 +1,17 @@
 using System;
 using System.Runtime.InteropServices;
-using System.Text;
-using TMPro;
+using AOT;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace DefaultNamespace
 {
-
     public class MarshallingExample : MonoBehaviour
     {
 #if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+        delegate void LogCallback(IntPtr request, int size);
+        [DllImport("test-plugin", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void registerLogCallback(LogCallback callback);
+
         [DllImport("test-plugin")]
         private static extern void passString(string value);
 
@@ -18,17 +19,24 @@ namespace DefaultNamespace
         private static extern void passInt(int value);
 
         [DllImport("test-plugin")]
-        private static extern void passFloa(float value);
+        private static extern void passFloat(float value);
 #endif
 
         void Start()
         {
-            // passString("hoge");
-            // passString(null);
-            // passInt(100);
-            UnityEngine.Debug.Log("Start start");
-            passFloa(3.14f);
-            UnityEngine.Debug.Log("Start end");
+            registerLogCallback(OnLogCallback);
+
+            passString("hoge");
+            passString(null);
+            passInt(100);
+            passFloat(3.14f);
+        }
+
+        [MonoPInvokeCallback(typeof(LogCallback))]
+        private static void OnLogCallback(IntPtr request, int size)
+        {
+            string str = Marshal.PtrToStringAnsi(request, size);
+            UnityEngine.Debug.Log(str);
         }
     }
 
